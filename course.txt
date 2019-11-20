@@ -1,0 +1,2 @@
+12090043	Military Theory and Skill Training	3	B+	3.6	2016	0	8	40	3
+01550013	Synthetical Practice of Electronics System Design	3	P	N/A	2016	1	0	5	8
