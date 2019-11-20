@@ -39,4 +39,4 @@ which results in: `12090043	Military Theory and Skill Training	3	B+	3.6	2016	0	8
 
 ## What does it look like?
 
-<video src="http://ml.cs.tsinghua.edu.cn/~jiayi/video/ethz.mov" controls="controls"> 您的浏览器不支持video 标签。 </video>
+[Demo](http://ml.cs.tsinghua.edu.cn/~jiayi/video/ethz.mov)
