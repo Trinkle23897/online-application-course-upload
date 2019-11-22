@@ -18,15 +18,35 @@ def wait_for_load(cond, driver): # wait for loading info
 def load_cond(driver):
     return len(bs(driver.page_source, 'html.parser').findAll(id='semester_m')) == 0
 
+math_courses = '''
+Calculus A(1)
+Calculus A(2)
+Linear Algebra(1)
+Linear Algebra(2)
+Introduction to Complex Analysis
+Stochastic Mathematical Methods
+Numerical Analysis
+'''.split('\n')[:-1]
+
+english_courses = '''
+Listening & Speaking for Academic Purposes (1)
+Listening & Speaking for Academic Purposes (2)
+Listening & Speaking for Academic Purposes (3)
+Listening & Speaking for Academic Purposes (4)
+Foreign Language Application
+Reading & Writing for Argumentative Essays
+Art English(1)
+Art English(2)
+'''.split('\n')[:-1]
+
 if __name__ == "__main__":
     driver = webdriver.Chrome()
     # login
-    driver.get("https://apply-psd.uchicago.edu/account/login?r=https%3a%2f%2fapply-psd.uchicago.edu%2fapply%2faca")
-    driver.find_element_by_id("_pc_1").click()
+    driver.get("https://apply.gsas.harvard.edu/account/login")
     driver.find_element_by_id("email").send_keys(username)
     driver.find_element_by_id("password").send_keys(password)
     driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Forgot Your Password?'])[1]/following::button[1]").click()
-    driver.find_element_by_link_text("Education").click()
+    driver.get('https://apply.gsas.harvard.edu/apply/aca')
     driver.find_element_by_link_text("Add Course").click()
     # load courses
     raw = open('course.txt').read().split('\n')[:-1]
@@ -40,4 +60,10 @@ if __name__ == "__main__":
         Select(driver.find_element_by_id("semester_m")).select_by_visible_text(mm)
         Select(driver.find_element_by_id("semester_y")).select_by_visible_text(t[0])
         driver.find_element_by_id("name").send_keys(c[1])
+        Select(driver.find_element_by_id("level")).select_by_visible_text("Undergraduate")
+        driver.find_element_by_id("number").send_keys(c[0])
+        driver.find_element_by_id("grade").send_keys(c[3])
+        Select(driver.find_element_by_id("courses_foreign_language")).select_by_visible_text("Yes" if c[1] in english_courses else "No")
+        Select(driver.find_element_by_id("courses_mathematics")).select_by_visible_text("Yes" if c[1] in math_courses else "No")
         driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='Save'])[1]/following::button[1]").click()
+    
