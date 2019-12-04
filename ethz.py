@@ -22,7 +22,7 @@ if __name__ == "__main__":
         driver.find_element_by_id("add").click()
         Select(driver.find_element_by_id("subjectCategory")).select_by_visible_text("Course")
         driver.find_element_by_id("title").send_keys(c[1])
-        driver.find_element_by_id("academicYear").send_keys(c[5].spit('-')[0])
+        driver.find_element_by_id("academicYear").send_keys(c[5].split('-')[0])
         driver.find_element_by_id("courseNumber").send_keys(c[0])
         driver.find_element_by_id("weeks").send_keys(c[9])
         driver.find_element_by_id("hoursTutorial").send_keys(c[6])
